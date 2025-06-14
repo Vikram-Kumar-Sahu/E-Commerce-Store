@@ -1,0 +1,84 @@
+<%- include('./partials/header') %>
+
+<section class="min-h-screen flex flex-col md:flex-row bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
+  <!-- Left Side: Visual / Branding -->
+  <div class="md:w-1/2 flex flex-col justify-center items-center p-12 bg-white shadow-lg rounded-tr-3xl rounded-br-3xl">
+    <h1 class="text-5xl font-extrabold text-purple-700 mb-4">Shop!</h1>
+    <p class="text-lg text-gray-600 max-w-md text-center">Your one-stop shop for exclusive products and unbeatable deals.</p>
+    <!-- Optionally add an illustration or branding image here -->
+  </div>
+
+  <!-- Right Side: Forms -->
+  <div class="md:w-1/2 flex flex-col justify-center p-10">
+    
+    <% if(error.length > 0) { %>
+      <div class="mb-6 p-3 rounded-md bg-red-500 text-white text-center font-semibold shadow">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-xl">
+      <!-- Tabs -->
+      <div class="flex justify-center gap-6 mb-8">
+        <button id="signupTab" class="text-purple-700 font-bold border-b-4 border-purple-700 pb-2 focus:outline-none">
+          Sign Up
+        </button>
+        <button id="loginTab" class="text-gray-500 hover:text-purple-700 focus:outline-none border-b-4 border-transparent pb-2">
+          Login
+        </button>
+      </div>
+
+      <!-- Signup Form -->
+      <form id="signupForm" action="/users/register" method="POST" class="space-y-5">
+        <input type="text" name="fullname" placeholder="Full Name" required
+          class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+        <input type="email" name="email" placeholder="Email" required
+          class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+        <input type="password" name="password" placeholder="Password" required
+          class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-md text-white font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+          Create Account
+        </button>
+      </form>
+
+      <!-- Login Form (hidden by default) -->
+      <form id="loginForm" action="/users/login" method="POST" class="space-y-5 hidden">
+        <input type="email" name="email" placeholder="Email" required
+          class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+        <input type="password" name="password" placeholder="Password" required
+          class="w-full px-4 py-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-md text-white font-semibold hover:from-purple-700 hover:to-indigo-700 transition">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Tab toggle script
+  const signupTab = document.getElementById('signupTab');
+  const loginTab = document.getElementById('loginTab');
+  const signupForm = document.getElementById('signupForm');
+  const loginForm = document.getElementById('loginForm');
+
+  signupTab.addEventListener('click', () => {
+    signupTab.classList.add('text-purple-700', 'font-bold', 'border-b-4', 'border-purple-700');
+    signupTab.classList.remove('text-gray-500');
+    loginTab.classList.remove('text-purple-700', 'font-bold', 'border-b-4', 'border-purple-700');
+    loginTab.classList.add('text-gray-500');
+    signupForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+  });
+
+  loginTab.addEventListener('click', () => {
+    loginTab.classList.add('text-purple-700', 'font-bold', 'border-b-4', 'border-purple-700');
+    loginTab.classList.remove('text-gray-500');
+    signupTab.classList.remove('text-purple-700', 'font-bold', 'border-b-4', 'border-purple-700');
+    signupTab.classList.add('text-gray-500');
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+  });
+</script>
+
+<%- include('./partials/footer') %>
