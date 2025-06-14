@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scatch</title>
+  <title>Shop Navbar</title>
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="font-['helvetica_now_display'] bg-white text-black">
+<body class="font-['helvetica_now_display'] bg-white">
+
   <!-- Navbar -->
-  <nav class="w-full fixed top-0 left-0 z-50 bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-5 py-4 flex items-center justify-between">
+  <nav class="w-full fixed top-0 left-0 z-50 bg-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center font-['helvetica_now_display']">
+
       <!-- Brand -->
-      <div class="text-2xl font-bold tracking-wide">Shop!</div>
+      <a href="/" class="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 text-transparent bg-clip-text">
+        Shop!
+      </a>
 
-      <!-- Menu (desktop) -->
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="#" class="hover:text-gray-600 transition">Home</a>
-        <a href="#" class="hover:text-gray-600 transition">Shop</a>
-        <a href="#" class="hover:text-gray-600 transition">About</a>
-        <a href="#" class="hover:text-gray-600 transition">Contact</a>
+      <!-- Desktop Menu -->
+      <% var loggedin = typeof loggedin !== "undefined" ? loggedin : true %>
+      <% if(loggedin) { %>
+      <div class="hidden md:flex gap-6 items-center text-gray-700 font-medium text-lg">
+        <a href="/shop" class="hover:text-purple-600 transition">Shop</a>
+        <a href="/cart" class="hover:text-purple-600 transition">Cart</a>
+        <a href="#" class="hover:text-purple-600 transition">My Account</a>
+        <a href="/users/logout" class="text-red-500 hover:text-red-700 transition">Logout</a>
       </div>
+      <% } %>
 
-      <!-- Right Icons -->
-      <div class="flex items-center gap-4">
-        <!-- Search -->
-        <div class="relative hidden sm:block">
-          <input type="text" placeholder="Search" class="px-3 py-1.5 rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-black" />
-          <i class="ri-search-line absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
-        </div>
-
-        <!-- Icons -->
-        <a href="#" class="text-xl hover:text-gray-600 transition"><i class="ri-user-line"></i></a>
-        <a href="#" class="text-xl hover:text-gray-600 transition"><i class="ri-shopping-cart-line"></i></a>
-
-        <!-- Hamburger (mobile) -->
-        <div class="md:hidden text-2xl">
-          <i class="ri-menu-line"></i>
-        </div>
-      </div>
+      <!-- Mobile Menu Button -->
+      <button id="menuToggle" class="md:hidden text-3xl text-gray-700 focus:outline-none">
+        <i class="ri-menu-3-line" id="menuIcon"></i>
+      </button>
     </div>
+
+    <!-- Mobile Menu -->
+    <% if(loggedin) { %>
+    <div id="mobileMenu" class="md:hidden hidden flex flex-col gap-4 px-6 py-4 bg-white shadow-md text-lg font-medium text-gray-700">
+      <a href="/shop" class="hover:text-purple-600 transition">Shop</a>
+      <a href="/cart" class="hover:text-purple-600 transition">Cart</a>
+      <a href="#" class="hover:text-purple-600 transition">My Account</a>
+      <a href="/users/logout" class="text-red-500 hover:text-red-700 transition">Logout</a>
+    </div>
+    <% } %>
   </nav>
 
-  <!-- Padding to prevent content behind navbar -->
-  <div class="pt-20"></div>
-</body>
+  <!-- Spacer to prevent content from hiding under navbar -->
+  <div class="h-[80px]"></div>
 
+  <!-- Navbar Toggle Script -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuIcon = document.getElementById("menuIcon");
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      menuIcon.classList.toggle("ri-menu-3-line");
+      menuIcon.classList.toggle("ri-close-line");
+    });
+  </script>
+</body>
 </html>

@@ -50,6 +50,7 @@ module.exports.loginUser = async function (req, res) {
                 const token = generateToken(user);
                 res.cookie("token", token);
                 res.send("Login successful");
+                
             }
             else {
                 return res.status(400).send("Email or Password incorrect");
